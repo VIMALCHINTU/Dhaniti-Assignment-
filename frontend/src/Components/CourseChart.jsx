@@ -1,3 +1,4 @@
+
 import {
   BarChart,
   Bar,
@@ -5,7 +6,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Cell
 } from "recharts";
 
 function CourseChart({ applications }) {
@@ -27,6 +29,15 @@ function CourseChart({ applications }) {
       count
     }))
     .sort((a, b) => b.count - a.count);
+
+  const COLORS = [
+    "#4f46e5",
+    "#16a34a",
+    "#f59e0b",
+    "#dc2626",
+    "#0891b2",
+    "#9333ea"
+  ];
 
   return (
     <div className="chart-card">
@@ -61,7 +72,14 @@ function CourseChart({ applications }) {
           <Bar
             dataKey="count"
             name="Applications"
-          />
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Bar>
 
         </BarChart>
 

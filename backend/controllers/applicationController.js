@@ -244,8 +244,10 @@ const createApplication = async (req, res) => {
       }
     );
 
+    // Generate new application ID
     const application_id =
       `EDU${maxNumber + 1}`;
+
 
     // ========================================
     // PREPARE APPLICATION DATA
@@ -267,6 +269,24 @@ const createApplication = async (req, res) => {
         "Submitted"
     };
 
+
+    // ========================================
+    // CREDIT SCORE VALIDATION
+    // ========================================
+
+    const creditScore =
+      Number(applicationData.credit_score);
+
+    if (creditScore < 550) {
+
+      return res.status(400).json({
+        message:
+          "Credit score must be 600 or above"
+      });
+
+    }
+
+
     // ========================================
     // REMOVE FRONTEND-ONLY FIELDS
     // ========================================
@@ -274,6 +294,7 @@ const createApplication = async (req, res) => {
     delete applicationData.state;
 
     delete applicationData.gender;
+
 
     // ========================================
     // CREATE APPLICATION
@@ -283,6 +304,11 @@ const createApplication = async (req, res) => {
       await Application.create(
         applicationData
       );
+
+
+    // ========================================
+    // SUCCESS RESPONSE
+    // ========================================
 
     res.status(201).json({
 
@@ -294,6 +320,10 @@ const createApplication = async (req, res) => {
     });
 
   } catch (error) {
+
+    // ========================================
+    // ERROR HANDLING
+    // ========================================
 
     console.error(
       "Create application error:",
@@ -311,6 +341,8 @@ const createApplication = async (req, res) => {
     });
   }
 };
+
+
 
 
 // ========================================

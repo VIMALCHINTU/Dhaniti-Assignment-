@@ -1,3 +1,4 @@
+
 import {
   BarChart,
   Bar,
@@ -5,7 +6,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Cell
 } from "recharts";
 
 function TimeChart({ applications }) {
@@ -18,9 +20,7 @@ function TimeChart({ applications }) {
       return;
     }
 
-    const date = new Date(
-      application.application_date
-    );
+    const date = new Date(application.application_date);
 
     const month = date.toLocaleString("en-IN", {
       month: "long"
@@ -55,6 +55,15 @@ function TimeChart({ applications }) {
       (a, b) => a.monthNumber - b.monthNumber
     );
 
+  const COLORS = [
+    "#6366f1",
+    "#22c55e",
+    "#f59e0b",
+    "#ef4444",
+    "#8b5cf6",
+    "#06b6d4"
+  ];
+
   return (
     <div className="chart-card">
 
@@ -83,7 +92,14 @@ function TimeChart({ applications }) {
           <Bar
             dataKey="count"
             name="Applications"
-          />
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Bar>
 
         </BarChart>
 

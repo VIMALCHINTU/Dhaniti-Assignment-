@@ -1,3 +1,4 @@
+
 import {
   PieChart,
   Pie,
@@ -8,6 +9,7 @@ import {
 } from "recharts";
 
 function StatusChart({ applications }) {
+
   const statusCounts = {
     Approved: 0,
     "Under Review": 0,
@@ -16,7 +18,9 @@ function StatusChart({ applications }) {
   };
 
   applications.forEach((application) => {
-    const status = application.application_status;
+
+    // trim handles values like "Approved "
+    const status = application.application_status?.trim();
 
     if (statusCounts[status] !== undefined) {
       statusCounts[status]++;
@@ -29,6 +33,14 @@ function StatusChart({ applications }) {
       value
     }))
     .filter((item) => item.value > 0);
+
+  // Colors for each status
+  const COLORS = [
+    "#22c55e", // Approved
+    "#f59e0b", // Under Review
+    "#ef4444", // Rejected
+    "#3b82f6"  // Submitted
+  ];
 
   return (
     <div className="chart-card">
@@ -48,9 +60,14 @@ function StatusChart({ applications }) {
             outerRadius={100}
             label
           >
+
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} />
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
             ))}
+
           </Pie>
 
           <Tooltip />
