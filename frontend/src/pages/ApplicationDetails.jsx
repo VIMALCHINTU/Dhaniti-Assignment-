@@ -12,7 +12,7 @@ function ApplicationDetails() {
 
   // Fetch application
   useEffect(() => {
-    fetch(`http://localhost:5000/api/applications/${id}`)
+    fetch(`https://dhaniti-assignment.onrender.com/api/applications/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Application not found");
@@ -37,7 +37,7 @@ function ApplicationDetails() {
       setUpdating(true);
 
       const response = await fetch(
-        `http://localhost:5000/api/applications/${id}/status`,
+        `https://dhaniti-assignment.onrender.com/${id}/status`,
         {
           method: "PATCH",
           headers: {

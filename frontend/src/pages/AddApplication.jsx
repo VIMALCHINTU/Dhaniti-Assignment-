@@ -35,7 +35,7 @@ function AddApplication() {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/api/applications",
+      "https://dhaniti-assignment.onrender.com/api/applications",
       {
         method: "POST",
         headers: {

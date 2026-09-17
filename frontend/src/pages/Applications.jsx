@@ -54,7 +54,7 @@ function Applications() {
       params.append("limit", 10);
 
       const response = await fetch(
-        `http://localhost:5000/api/applications?${params.toString()}`
+        `https://dhaniti-assignment.onrender.com/api/applications?${params.toString()}`
       );
 
       if (!response.ok) {
@@ -84,7 +84,7 @@ function Applications() {
   // Get filter options
   useEffect(() => {
     fetch(
-      "http://localhost:5000/api/applications?limit=100"
+      "https://dhaniti-assignment.onrender.com/api/applications?limit=100"
     )
       .then((response) => response.json())
       .then((data) => {

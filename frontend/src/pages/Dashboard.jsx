@@ -14,7 +14,7 @@ function Dashboard() {
   // ==============================
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/applications?limit=1000")
+    fetch("https://dhaniti-assignment.onrender.com/api/applications?limit=1000")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch applications");
