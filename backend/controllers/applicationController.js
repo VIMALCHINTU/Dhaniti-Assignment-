@@ -281,7 +281,7 @@ const createApplication = async (req, res) => {
 
       return res.status(400).json({
         message:
-          "Credit score must be 600 or above"
+          "Credit score must be 55 0 or above"
       });
 
     }
